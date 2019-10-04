@@ -1,5 +1,5 @@
 import React from 'react';
-import Game from './game/Game.js';
+import Game from './pages/Game.js';
 import { HashRouter, Route } from 'react-router-dom';
 import Welcome from './pages/Welcome.js';
 import Queue from './pages/Queue.js';
