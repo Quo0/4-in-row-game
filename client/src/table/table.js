@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Column from '.././column/column.js';
 import './table.css';
 
@@ -16,5 +17,14 @@ function Table(props) {
 		</div>
 	);
 }
+
+Table.propTypes = {
+	field: PropTypes.array.isRequired,
+	onColumnPress: PropTypes.func.isRequired
+};
+
+Table.defaultProps = {
+	onColumnPress: () => console.log('Haha! You failed!')
+};
 
 export default Table;

@@ -3,7 +3,7 @@ import Axios from 'axios';
 import Table from '../table/table.js';
 import { SERVER_API, TIMEOUTS } from '../constants';
 
-export default function Game(props) {  
+export default function Game() {  
   const [loading, setLoading] = useState(true);
   const [winner, setWinner] = useState();
   const [field, setField] = useState([]);  
