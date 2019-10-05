@@ -9,14 +9,17 @@ const addNewChipToArray = (column, newValue) => [
   ...column.slice(column.indexOf(0) + 1)
 ];
 
-const checkForWinner = (verticalField, [ player1, player2 ]) => {
-  const user1winCombo = player1.name.repeat(4), user2winCombo = player2.name.repeat(4);
+const checkForWinner = (verticalField, currentPlayer) => {
+  const winCombo = currentPlayer.name.repeat(4);
   const horizontalField = new Array(verticalField[0].length).fill([]).map((_subArr, index) => verticalField.map(column => column[index]));
 
-  const user1Won = horizontalOrVerticalComboCheck(verticalField, user1winCombo) || horizontalOrVerticalComboCheck(horizontalField, user1winCombo) || diagonalComboCheck(verticalField, player1.name);
-  const user2Won = horizontalOrVerticalComboCheck(verticalField, user2winCombo) || horizontalOrVerticalComboCheck(horizontalField, user2winCombo) || diagonalComboCheck(verticalField, player2.name);;
-
-  return user1Won ? player1 : user2Won ? player2 : null;
+  if (
+    horizontalOrVerticalComboCheck(verticalField, winCombo) ||
+    horizontalOrVerticalComboCheck(horizontalField, winCombo) ||
+    diagonalComboCheck(verticalField, currentPlayer.name)
+  ) {
+    return currentPlayer; // returning the winner
+  }
 };
 
 const horizontalOrVerticalComboCheck = (field, combo) => field.map(column => column.join('')).some(colAsString => colAsString.indexOf(combo) >= 0);
@@ -37,7 +40,7 @@ const diagonalComboCheck = (field, keyword) => {
             checkForDiagonalMatch(columnIndex, itemIndex, 'right', field, keyword, rMatchCount) ||
             checkForDiagonalMatch(columnIndex, itemIndex, 'not-right =)', field, keyword, lMatchCount)
           ) {
-            return true;
+            return true; // the combo was found
           }
         }
       }

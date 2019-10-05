@@ -9,8 +9,8 @@ router.get('/get-state', (_req, res) => {
 
 router.post('/set-state', (req, res) => {
   gameState.field = Game.getNewField(gameState.field, req.body.columnId, req.body.currentPlayer.name);
+  gameState.winner = Game.checkForWinner(gameState.field, gameState.currentPlayer);
   gameState.currentPlayer = gameState.currentPlayer.id === gameState.playerList[0].id ? gameState.playerList[1] : gameState.playerList[0];
-  gameState.winner = Game.checkForWinner(gameState.field, gameState.playerList);
   res.sendStatus(200);
 });
 
